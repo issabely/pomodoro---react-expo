@@ -1,14 +1,51 @@
+import { useState } from "react";
 import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 
+const pomodoro = [
+  {
+    id: 'focus',
+    initialValue:25,
+    image: require('./pomodoro.png')
+  },
+  {
+    id: 'short',
+    initialValue:5,
+    image: require('./short.png')
+  },
+  {
+    id: 'long',
+    initialValue:15,
+    image: require('./long.png')
+  },
+]
+
 export default function Index() {
+  const [timerType, setTimerType] = useState(pomodoro[0])
   return (
     <View
       style={styles.container}
     >
-      <Image source={require('./pomodoro.png')}/>
+      <Image source={timerType.image}/>
       <View style={styles.actions}>
+        <View style={styles.context}>
+          <Pressable style={styles.contextButtonActive}>
+            <Text style={styles.contextButtonText}>
+              Foco
+            </Text>
+          </Pressable>
+          <Pressable>
+            <Text style={styles.contextButtonText}>
+              Pausa curta
+            </Text>
+          </Pressable>
+          <Pressable>
+            <Text style={styles.contextButtonText}>
+              Pausa longa
+            </Text>
+          </Pressable>
+        </View>
         <Text style={styles.timer}>
-          25:00
+          {new Date(timerType.initialValue * 1000).toLocaleTimeString('pt-BR',{minute: '2-digit',second:'2-digit'})}
         </Text>
         <Pressable style={styles.button}>
           <Text style={styles.buttonText}>
@@ -47,15 +84,31 @@ const styles = StyleSheet.create({
     borderColor:'#144480',
     gap:32,
   },
+  context:{
+    flexDirection:'row',
+   justifyContent:'space-around',
+    alignItems:'center'
+  },
+  contextButtonActive:{
+    backgroundColor:'#144480',
+    borderRadius: 8,
+  },
+  contextButtonText:{
+    fontSize: 12.5,
+    color: '#FFF',
+    padding:8,    
+  },
   timer:{
     fontSize: 54,
     color:'#fff',
+    fontWeight: 'bold',
     textAlign:'center',
   },
   button:{
     backgroundColor:'#B872FF',
     borderRadius:32,
     padding: 10,
+    padding: 8,
   },
   buttonText:{
     textAlign:'center',
