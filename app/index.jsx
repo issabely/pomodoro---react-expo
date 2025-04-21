@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Image, StyleSheet, Text, View, Pressable } from "react-native";
+import {FokusButton} from "../components/FokusButton"
 
 const pomodoro = [
   {
@@ -23,7 +24,9 @@ const pomodoro = [
 ]
 
 export default function Index() {
+
   const [timerType, setTimerType] = useState(pomodoro[0])
+
   return (
     <View
       style={styles.container}
@@ -46,15 +49,11 @@ export default function Index() {
         <Text style={styles.timer}>
           {new Date(timerType.initialValue * 1000).toLocaleTimeString('pt-BR',{minute: '2-digit',second:'2-digit'})}
         </Text>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>
-          Começar
-          </Text>
-        </Pressable>
+        <FokusButton></FokusButton>
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>
-          Projeto ficticio e sem fins comerciais.
+          Projeto fictício e sem fins comerciais.
         </Text>
         <Text style={styles.footerText}>
           Desenvolvido por alura.
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     alignItems:"center",
     backgroundColor:'#021123',
+    gap: 40
   },
   text:{
     color:'#fff',
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   actions:{
     paddingVertical:24,
     paddingHorizontal: 24,
-    backgroundColor:'#144480',
+    backgroundColor:'#14448080',
     width: '80%',
     borderRadius:32,
     borderWidth:2,
@@ -103,17 +103,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign:'center',
   },
-  button:{
-    backgroundColor:'#B872FF',
-    borderRadius:32,
-    padding: 10,
-    padding: 8,
-  },
-  buttonText:{
-    textAlign:'center',
-    color:'#021123',
-    fontSize:18,
-  },
+
   footer:{
     width: '80%',
   },
