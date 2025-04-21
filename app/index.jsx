@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 import {FokusButton} from "../components/FokusButton";
 import {ActionButton} from "../components/ActionButton";
+import{Timer} from "../components/Timer"
 
 const pomodoro = [
   {
@@ -44,9 +45,7 @@ export default function Index() {
             />
           ))}
         </View>
-        <Text style={styles.timer}>
-          {new Date(timerType.initialValue * 1000).toLocaleTimeString('pt-BR',{minute: '2-digit',second:'2-digit'})}
-        </Text>
+       <Timer totalSeconds={timerType.initialValue}/>
         <FokusButton></FokusButton>
       </View>
       <View style={styles.footer}>
@@ -86,13 +85,6 @@ const styles = StyleSheet.create({
    justifyContent:'space-around',
     alignItems:'center',
   },
-  timer:{
-    fontSize: 54,
-    color:'#fff',
-    fontWeight: 'bold',
-    textAlign:'center',
-  },
-
   footer:{
     width: '80%',
   },
